@@ -1,0 +1,357 @@
+---
+title: "Basic Git Terminologies"
+author: "eusha54"
+format: pdf
+---
+
+Suppose you’re building a **Python script** called `data_toolkit` that processes data.
+
+### **Step 1: Initialize Git in Your Project**
+
+You create a folder called `data_toolkit` for your Python project and initialize Git to track it by running the following code
+
+-   Command
+
+``` bash
+  > git init
+```
+
+-   Here, Git sets up a hidden folder to track changes in your project.
+
+### **Step 2: Add Files to Your Project**
+
+You create a Python script `main.py` and a helper script `utils.py`. Now, you stage these files for tracking.
+
+-   Command:
+
+``` bash
+  > git add main.py utils.py
+```
+
+Or track everything
+
+``` bash
+  > git add .
+```
+
+-   Now, Git stages these files for the next commit.
+
+### **Step 3: Check Project Status**
+
+Before committing, you check the status of your project to ensure everything is staged correctly.
+
+-   Command:
+
+``` bash
+  > git status
+```
+
+-   Now, Git shows -
+
+```         
+"""{python}
+    -   Tracked files (`main.py`, `utils.py` are staged).
+    -   Any untracked or modified files.
+"""
+```
+
+### **Step 4: Commit Your Changes**
+
+You’ve finished writing the initial scripts and want to save this version.
+
+-   Command:
+
+    ```         
+    bash
+    ```
+
+    Copy code
+
+    `git commit -m "Add initial scripts: main.py and utils.py"`
+
+-   What happens: Git saves a snapshot of your project with the message *"Add initial scripts."*
+
+### **Step 5: Check the Log**
+
+You want to view the history of commits to track progress.
+
+-   Command:
+
+    ```         
+    bash
+    ```
+
+    Copy code
+
+    `git log`
+
+-   What happens: Git displays:
+
+    -   Commit IDs
+
+    -   Author names
+
+    -   Timestamps
+
+    -   Messages like *"Add initial scripts."*
+
+### **Step 6: Create a Branch for a New Feature**
+
+You decide to add a feature to generate reports, so you create a new branch.
+
+-   Command:
+
+    ```         
+    bash
+    ```
+
+    Copy code
+
+    `git branch report-generator`
+
+-   What happens: Git creates a branch called `report-generator`.
+
+### **Step 7: Switch to the New Branch**
+
+Now, you want to work on the new feature without affecting the main branch.
+
+-   Command:
+
+    ```         
+    bash
+    ```
+
+    Copy code
+
+    `git checkout report-generator`
+
+-   What happens: Git switches you to the `report-generator` branch.
+
+### **Step 8: Add and Commit Changes in the Branch**
+
+You create a new file `report.py` and modify `utils.py` to support report generation.
+
+-   Commands:
+
+    ```         
+    bash
+    ```
+
+    Copy code
+
+    `git add . git commit -m "Add report generation functionality"`
+
+-   What happens: Changes are saved in the `report-generator` branch.
+
+### **Step 9: Merge the Branch Back to Main**
+
+After testing, you decide to merge the new feature into the main branch.
+
+-   Switch to the main branch:
+
+    ```         
+    bash
+    ```
+
+    Copy code
+
+    `git checkout main`
+
+-   Merge the `report-generator` branch:
+
+    ```         
+    bash
+    ```
+
+    Copy code
+
+    `git merge report-generator`
+
+-   What happens: The changes from `report-generator` are combined into the `main` branch.
+
+### **Step 10: Undo a Mistake (Reset)**
+
+You realize you accidentally added a debug print statement in `report.py`. You want to undo the last commit to fix it.
+
+-   Command:
+
+    ```         
+    bash
+    ```
+
+    Copy code
+
+    `git reset --soft HEAD~1`
+
+-   What happens: The last commit is undone, but your changes remain in the working directory for editing.
+
+### Example Directory After Changes:
+
+```         
+bash
+```
+
+Copy code
+
+`data_toolkit/ ├── main.py          # Main script ├── utils.py         # Helper functions ├── report.py        # New feature for report generation`
+
+### Summary of Commands Used:
+
+1.  **init:** Start tracking your Python project.
+
+2.  **add:** Stage Python files for the next commit.
+
+3.  **status:** Check what’s staged and what needs attention.
+
+4.  **commit:** Save a snapshot of your code changes.
+
+5.  **log:** View commit history.
+
+6.  **branch:** Create a branch for new features.
+
+7.  **checkout:** Switch to another branch.
+
+8.  **merge:** Combine features into the main branch.
+
+9.  **reset:** Undo mistakes to fix errors in your code.
+
+This workflow is typical for managing Python projects using Git, making collaboration and experimentation easier.\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+
+Let’s adapt the example to a Python project. Suppose you’re building a **Python script** called `data_toolkit` that processes data.
+
+------------------------------------------------------------------------
+
+### **Step 1: Initialize Git in Your Project**
+
+You create a folder called `data_toolkit` for your Python project and initialize Git to track it.\
+- Command:\
+`bash   git init` - What happens: Git sets up a hidden folder to track changes in your project.
+
+------------------------------------------------------------------------
+
+### **Step 2: Add Files to Your Project**
+
+You create a Python script `main.py` and a helper script `utils.py`. Now, you stage these files for tracking.\
+- Command:\
+`bash   git add main.py utils.py` Or track everything:\
+`bash   git add .` - What happens: Git stages these files for the next commit.
+
+------------------------------------------------------------------------
+
+### **Step 3: Check Project Status**
+
+Before committing, you check the status of your project to ensure everything is staged correctly.\
+- Command:\
+`bash   git status` - What happens: Git shows: - Tracked files (`main.py`, `utils.py` are staged).\
+- Any untracked or modified files.
+
+------------------------------------------------------------------------
+
+### **Step 4: Commit Your Changes**
+
+You’ve finished writing the initial scripts and want to save this version.\
+- Command:\
+`bash   git commit -m "Add initial scripts: main.py and utils.py"` - What happens: Git saves a snapshot of your project with the message *"Add initial scripts."*
+
+------------------------------------------------------------------------
+
+### **Step 5: Check the Log**
+
+You want to view the history of commits to track progress.\
+- Command:\
+`bash   git log` - What happens: Git displays: - Commit IDs\
+- Author names\
+- Timestamps\
+- Messages like *"Add initial scripts."*
+
+------------------------------------------------------------------------
+
+### **Step 6: Create a Branch for a New Feature**
+
+You decide to add a feature to generate reports, so you create a new branch.\
+- Command:\
+`bash   git branch report-generator` - What happens: Git creates a branch called `report-generator`.
+
+------------------------------------------------------------------------
+
+### **Step 7: Switch to the New Branch**
+
+Now, you want to work on the new feature without affecting the main branch.\
+- Command:\
+`bash   git checkout report-generator` - What happens: Git switches you to the `report-generator` branch.
+
+------------------------------------------------------------------------
+
+### **Step 8: Add and Commit Changes in the Branch**
+
+You create a new file `report.py` and modify `utils.py` to support report generation.\
+- Commands:\
+`bash   git add .   git commit -m "Add report generation functionality"` - What happens: Changes are saved in the `report-generator` branch.
+
+------------------------------------------------------------------------
+
+### **Step 9: Merge the Branch Back to Main**
+
+After testing, you decide to merge the new feature into the main branch.\
+- Switch to the main branch:\
+`bash   git checkout main` - Merge the `report-generator` branch:\
+`bash   git merge report-generator` - What happens: The changes from `report-generator` are combined into the `main` branch.
+
+------------------------------------------------------------------------
+
+### **Step 10: Undo a Mistake (Reset)**
+
+You realize you accidentally added a debug print statement in `report.py`. You want to undo the last commit to fix it.\
+- Command:\
+`bash   git reset --soft HEAD~1` - What happens: The last commit is undone, but your changes remain in the working directory for editing.
+
+------------------------------------------------------------------------
+
+### Example Directory After Changes:
+
+```{raw}
+data_toolkit/
+├── main.py          # Main script
+├── utils.py         # Helper functions
+├── report.py        # New feature for report generation
+```
+
+------------------------------------------------------------------------
+
+### Summary of Commands Used:
+
+1.  **init:** Start tracking your Python project.\
+2.  **add:** Stage Python files for the next commit.\
+3.  **status:** Check what’s staged and what needs attention.\
+4.  **commit:** Save a snapshot of your code changes.\
+5.  **log:** View commit history.\
+6.  **branch:** Create a branch for new features.\
+7.  **checkout:** Switch to another branch.\
+8.  **merge:** Combine features into the main branch.\
+9.  **reset:** Undo mistakes to fix errors in your code.
+
+This workflow is typical for managing Python projects using Git, making collaboration and experimentation easier.
