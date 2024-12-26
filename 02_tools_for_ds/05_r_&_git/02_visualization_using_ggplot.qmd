@@ -1,0 +1,72 @@
+---
+title: "Data Visualization"
+author: "eusha54"
+geometry: margin=1in
+format:
+  pdf:
+    code-overflow: wrap
+---
+
+1.  Read and view the first 5 rows of the Data
+
+```{r}
+library(datasets)
+
+data(mtcars)
+  # loading data
+head(mtcars, 5)
+  # first 5 rows of data
+```
+
+2.  type the following to get info about the a variable
+
+```{r}
+# ?mtcars
+```
+
+\newpage
+
+3.  use the following code to create a scatterplot of two variables disp and mpg
+
+```{r}
+library(ggplot2)
+  # loading ggplot package
+
+ggplot(aes(x=disp, y=mpg), data=mtcars) + geom_point()
+```
+
+\newpage
+
+4.  add title and labels to the last plot
+
+```{r}
+#| code-overflow: wrap
+ggplot(aes(x=disp, y=mpg), data=mtcars) + geom_point() + ggtitle("displacement vs miles per gallon") + labs(x="Displacement", y="Miles per Gallon")
+```
+
+\newpage
+
+5.  Use the following to create a boxplot of the the distribution of mpg for the individual Engine types vs Engine (0 = V-shaped, 1 = straight) To do this you have to make vs a string or factor.
+
+```{r}
+#make vs a factor
+mtcars$vs <- as.factor(mtcars$vs)
+
+#create boxplot of the distribution for v-shaped and straight Engine
+
+ggplot(aes(x=vs, y=mpg), data = mtcars) + geom_boxplot()
+```
+
+\newpage
+
+6.  add color to boxplot
+
+```{r}
+ggplot(aes(x=vs, y=mpg, fill=vs), data=mtcars) + geom_boxplot(alpha=0.3) + theme(legend.position = "none")
+```
+
+7.  histogram of single variable.
+
+```{r}
+ggplot(aes(x=wt), data=mtcars) + geom_histogram(binwidth = 0.5)
+```
