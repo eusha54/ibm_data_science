@@ -2,9 +2,8 @@
 title: "Data Visualization"
 author: "eusha54"
 geometry: margin=1in
-format:
-  pdf:
-    code-overflow: wrap
+format: pdf
+code-overflow: wrap
 ---
 
 1.  Read and view the first 5 rows of the Data
@@ -40,7 +39,6 @@ ggplot(aes(x=disp, y=mpg), data=mtcars) + geom_point()
 4.  add title and labels to the last plot
 
 ```{r}
-#| code-overflow: wrap
 ggplot(aes(x=disp, y=mpg), data=mtcars) + geom_point() + ggtitle("displacement vs miles per gallon") + labs(x="Displacement", y="Miles per Gallon")
 ```
 
