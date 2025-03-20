@@ -1,0 +1,176 @@
+-- selecting database
+USE testdb;
+
+DROP TABLE IF EXISTS EMPLOYEES;
+DROP TABLE IF EXISTS JOB_HISTORY;
+DROP TABLE IF EXISTS JOBS;
+DROP TABLE IF EXISTS DEPARTMENTS;
+DROP TABLE IF EXISTS LOCATIONS;
+
+CREATE TABLE EMPLOYEES (
+                            EMP_ID CHAR(9) NOT NULL, 
+                            F_NAME VARCHAR(15) NOT NULL,
+                            L_NAME VARCHAR(15) NOT NULL,
+                            SSN CHAR(9),
+                            B_DATE DATE,
+                            SEX CHAR,
+                            ADDRESS VARCHAR(30),
+                            JOB_ID CHAR(9),
+                            SALARY DECIMAL(10,2),
+                            MANAGER_ID CHAR(9),
+                            DEP_ID CHAR(9) NOT NULL,
+                            PRIMARY KEY (EMP_ID));
+                            
+  CREATE TABLE JOB_HISTORY (
+                            EMPL_ID CHAR(9) NOT NULL, 
+                            START_DATE DATE,
+                            JOBS_ID CHAR(9) NOT NULL,
+                            DEPT_ID CHAR(9),
+                            PRIMARY KEY (EMPL_ID,JOBS_ID));
+ 
+ CREATE TABLE JOBS (
+                            JOB_IDENT CHAR(9) NOT NULL, 
+                            JOB_TITLE VARCHAR(30),
+                            MIN_SALARY DECIMAL(10,2),
+                            MAX_SALARY DECIMAL(10,2),
+                            PRIMARY KEY (JOB_IDENT));
+
+CREATE TABLE DEPARTMENTS (
+                            DEPT_ID_DEP CHAR(9) NOT NULL, 
+                            DEP_NAME VARCHAR(15) ,
+                            MANAGER_ID CHAR(9),
+                            LOC_ID CHAR(9),
+                            PRIMARY KEY (DEPT_ID_DEP));
+
+CREATE TABLE LOCATIONS (
+                            LOCT_ID CHAR(9) NOT NULL,
+                            DEP_ID_LOC CHAR(9) NOT NULL,
+                            PRIMARY KEY (LOCT_ID,DEP_ID_LOC));
+                            
+
+SELECT * FROM EMPLOYEES;
+SELECT * FROM JOB_HISTORY;
+SELECT * FROM JOBS;
+SELECT * FROM DEPARTMENTS;
+SELECT * FROM LOCATIONS;
+
+
+-- The following will raise an error
+SELECT * FROM EMPLOYEES
+	WHERE SALARY > AVG(SALARY);
+    
+-- Correct approach for the above problem
+SELECT * FROM EMPLOYEES
+	WHERE SALARY > (SELECT AVG(SALARY) FROM EMPLOYEES);    
+                            
+SELECT EMP_ID, SALARY, (SELECT MAX(SALARY) FROM EMPLOYEES) AS MAX_SALARY FROM EMPLOYEES;
+
+SELECT F_NAME, L_NAME FROM EMPLOYEES
+	WHERE B_DATE = (SELECT MIN(B_dATE) FROM EMPLOYEES);
+    
+SELECT AVG(SALARY) FROM
+	(SELECT SALARY FROM EMPLOYEES 
+		ORDER BY SALARY DESC 
+		LIMIT 5) AS SALARY;
+
+SELECT AVG(SALARY) FROM
+	(SELECT SALARY FROM EMPLOYEES
+		ORDER BY SALARY ASC
+        LIMIT 5) AS SALARY;
+
+SELECT F_NAME, L_NAME, B_dATE 
+FROM EMPLOYEES
+WHERE B_dATE <= (
+	SELECT AVG(B_dATE) FROM EMPLOYEES
+);
+
+
+SELECT * FROM JOB_HISTORY;
+
+SELECT 
+	EMPL_ID AS EMPLOYEE_ID,
+    (SELECT YEAR(FROM_DAYS(DATEDIFF(CURRENT_DATE, START_DATE)))) AS YEAR_OF_SERVICE,
+	--    (SELECT (FROM_DAYS(DATEDIFF(CURRENT_DATE, START_DATE)))) AS YEAR_OF_SERVICE
+	(SELECT AVG(YEAR(FROM_DAYS(DATEDIFF(CURRENT_DATE, START_DATE)))) FROM JOB_HISTORY) AS AVG_YEAR_OF_SERVICE
+FROM JOB_HISTORY;
+
+
+
+
+
+
+
+
+-- ------------------------------------ lab 06 - multiple tables and joins ----------------------------------------------
+
+
+SELECT * FROM EMPLOYEES;
+SELECT * FROM JOBS;
+
+SELECT * FROM EMPLOYEES 
+	WHERE JOB_ID IN (SELECT JOB_IDENT FROM JOBS);
+	
+    -- BOTH RESULTS SAME, DIFFERENCE WHAT?
+
+
+SELECT * FROM JOBS
+	WHERE JOB_IDENT IN (
+		SELECT JOB_ID FROM EMPLOYEES 
+        WHERE SALARY > 70000
+	);
+	
+    -- NOTICE THE DIFFERENCE
+
+
+-- ACCESSING MULTIPLE TABLES WITH IMPLICIT JOIN
+SELECT * FROM EMPLOYEES, JOBS
+	WHERE EMPLOYEES.JOB_ID = JOBS.JOB_IDENT;
+    
+SELECT * FROM EMPLOYEES;
+
+
+-- using Aliases
+SELECT * FROM EMPLOYEES E, JOBS J
+	WHERE E.JOB_ID = J.JOB_IDENT;
+    
+    -- SAME AS BEFORE BUT SHORTER CODE
+    
+    
+SELECT EMP_ID, F_NAME, L_NAME, JOB_TITLE
+FROM EMPLOYEES E, JOBS J 
+	WHERE E.JOB_ID = J.JOB_IDENT;
+
+
+-- BETTER VERSION
+SELECT EMP
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
