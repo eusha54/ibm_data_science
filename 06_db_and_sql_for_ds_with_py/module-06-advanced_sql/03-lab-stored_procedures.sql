@@ -1,4 +1,5 @@
-USE testdb;
+CREATE DATABASE shoeshop_db;
+USE shoeshop_db;
 
 
 -- Bank account data creation
@@ -55,15 +56,50 @@ BEGIN
 		ROLLBACK;
         RESIGNAL;
 	END;
+    
+    START TRANSACTION;
+    
+    SET SQL_SAFE_UPDATES = 0;
+
+    UPDATE BankAccounts
+		SET Balance = Balance - 200
+        WHERE AccountName = "Rose";
+    
+    UPDATE BankAccounts
+		SET Balance = Balance + 200
+        WHERE AccountName = "Shoe Shop";
+	
+    UPDATE ShoeShop
+		SET stock = stock - 1
+        WHERE Product = "Boots";
+	
+	UPDATE BankAccounts
+		SET Balance = Balance - 300
+        WHERE AccountName = "Rose";
+
+	SET SQL_SAFE_UPDATES = 1;
+    
+	COMMIT;
+    
+END @
+
+DELIMITER ;
 
 
+SELECT * FROM BankAccounts
+	WHERE AccountName in ("Rose", "Shoe Shop");
+
+SELECT * FROM ShoeShop;
+
+SET SQL_SAFE_UPDATES = 0;
+CALL transaction_rose;
+SET SQL_SAFE_UPDATES = 1;
 
 
+SELECT * FROM BankAccounts
+	WHERE AccountName in ("Rose", "Shoe Shop");
 
-
-
-
-
+SELECT * FROM ShoeShop;
 
 
 
